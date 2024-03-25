@@ -10,7 +10,7 @@
 - Sorting, Theme, Page no  are persists
 - Automatic Realtime Connectivity checker 
 - Data load from Api Automatically after network connected from disconnected condition  otherwise data load from memory
-- Empty widget if start first time offline and listening next connection mood for automatic update the UI
+- Empty widget will show if app start first time offline and app will be listening next connection mood for automatic update the UI
 - API error handled
 - Repositories and Repositories Detail Page
 - UI inspired by original Github web view for mobile screen

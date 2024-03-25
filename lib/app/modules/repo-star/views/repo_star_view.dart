@@ -51,37 +51,51 @@ class RepoStarView extends GetView<RepoStarController> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      SizedBox(
-                        height: 640.h,
+                      Flexible(
                         child: ListView.separated(
                             padding:
                                 EdgeInsets.fromLTRB(25.sp, 25.sp, 25.sp, 0),
                             controller: controller.scrollController,
                             itemBuilder: (context, index) {
                               final repo = controller.repos[index];
-                              return SplashContainer(
-                                onPressed: () {
-                                  controller.selectedRepo.value = index;
-                                  Get.toNamed(AppPages.REPO_DETAILS);
+                              return TweenAnimationBuilder(
+                                tween: Tween<double>(begin: 0, end: 1),
+                                duration: const Duration(milliseconds: 1700),
+                                builder: (BuildContext context, double value,
+                                    Widget? child) {
+                                  return Opacity(
+                                    opacity: value,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.only(top: value * 12.r),
+                                      child: child,
+                                    ),
+                                  );
                                 },
-                                radius: 15,
-                                child: Padding(
-                                  padding: EdgeInsets.all(16.sp),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      _repoHeading(repo, theme),
-                                      // repo title and image
-                                      _repoDescription(repo, theme),
-                                      // repo description
-                                      _repoTopics(repo, theme) // repo topics
-                                      ,
-                                      _repoCounts(repo, theme),
-                                      // repo language and stars
-                                      _repoUpdatedAt(repo, theme),
-                                      // repo last update time
-                                    ],
+                                child: SplashContainer(
+                                  onPressed: () {
+                                    controller.selectedRepo.value = index;
+                                    Get.toNamed(AppPages.REPO_DETAILS);
+                                  },
+                                  radius: 15,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(16.sp),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        _repoHeading(repo, theme),
+                                        // repo title and image
+                                        _repoDescription(repo, theme),
+                                        // repo description
+                                        _repoTopics(repo, theme) // repo topics
+                                        ,
+                                        _repoCounts(repo, theme),
+                                        // repo language and stars
+                                        _repoUpdatedAt(repo, theme),
+                                        // repo last update time
+                                      ],
+                                    ),
                                   ),
                                 ),
                               );
@@ -211,10 +225,10 @@ class RepoStarView extends GetView<RepoStarController> {
     return controller.repos.isNotEmpty
         ? Container(
             height: 65.sp,
-            padding: EdgeInsets.only(bottom: 15.sp),
             color: theme.appBarTheme.backgroundColor?.withOpacity(.2),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 MyIconButton(
                   onPressed: controller.currentPage.value == 1
